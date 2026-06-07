@@ -1,9 +1,33 @@
+from sentence_transformers import SentenceTransformer, util
+
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+
+brain_refs = {
+    "スマホ疲労": "スマホ SNS TikTok YouTube 無限スクロール",
+    "勉強疲労": "勉強 暗記 テスト 集中できない",
+}
+def semantic_score(text, refs):
+    text_emb = model.encode(text, convert_to_tensor=True)
+
+    score = 0
+
+    for _, ref in refs.items():
+        ref_emb = model.encode(ref, convert_to_tensor=True)
+        sim = util.pytorch_cos_sim(text_emb, ref_emb).item()
+
+        if sim > 0.5:
+            score += 40
+
+    return score
+    
 def calc_fatigue(texts):
     text = " ".join(texts)
 
     brain = 0
     mental = 0
     body = 0
+
+    brain += semantic_score(text, brain_refs)
 
     brain_keywords = {
         "スマホ": 30,
