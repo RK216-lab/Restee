@@ -22,13 +22,9 @@ def analyze(data: InputData):
 
     score = calc_fatigue(data.texts)
 
-    videos = recommend(
-        score["brain"],
-        score["mental"],
-        score["body"]
-    )
+    rec = recommend(score)
 
     return {
         "score": score,
-        "recommendations": videos
+        "recommendations": rec
     }
