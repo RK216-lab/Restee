@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+import json
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
 from score_engine import calc_fatigue
 from recommender import recommend
@@ -14,14 +14,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class InputData(BaseModel):
-    texts: list[str]
-
 @app.post("/analyze")
-def analyze(data: InputData):
+async def analyze(
+    texts: str = Form(...),  # JSON文字列として受け取る
+    audio: UploadFile = File(...)
+):
+    # JSON文字列をリストにパース
+    text_list = json.loads(texts)
 
-    score = calc_fatigue(data.texts)
+    # 音声データを一時的にバイナリとして読み込む
+    audio_bytes = await audio.read()
 
+    # スコア計算エンジンを呼び出す（テキストと音声を両方渡す）
+    score = calc_fatigue(text_list, audio_bytes)
+
+    # 推薦ロジック
     rec = recommend(score)
 
     return {
