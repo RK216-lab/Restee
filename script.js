@@ -130,7 +130,7 @@ async function sendToAPI() {
   formData.append("audio", audioBlob, "user_voice.webm");
 
   try {
-    const res = await fetch("https://YOUR-RENDER.onrender.com/analyze", {
+    const res = await fetch("https://restee.onrender.com/analyze", {
       method: "POST",
       body: formData
     });
