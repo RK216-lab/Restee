@@ -49,7 +49,7 @@ async function analyze() {
     document.getElementById("t3").value
   ];
 
-  const res = await fetch("http://127.0.0.1:8000/analyze", {
+  const res = await fetch("https://restee.onrender.com/analyze", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
