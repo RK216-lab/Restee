@@ -1,3 +1,4 @@
+console.log("script loaded");
 const micBtn = document.getElementById("micBtn");
 const textEl = document.getElementById("text");
 const resultEl = document.getElementById("result");
