@@ -1,36 +1,17 @@
-def recommend(brain, mental, body):
+def recommend(score):
 
-    videos = {
-        "brain": [
-            "5分目の目のストレッチ",
-            "デジタルデトックスBGM",
-            "散歩用リラックス音楽"
-        ],
-        "mental": [
-            "深呼吸ガイド",
-            "自己肯定感を回復する動画",
-            "何もしなくていい時間の作り方"
-        ],
-        "body": [
-            "肩こりストレッチ",
-            "姿勢改善エクササイズ",
-            "寝る前リラックスBGM"
-        ]
-    }
+    rec = []
 
-    result = []
+    if score["brain"] > 50:
+        rec.append("短い休憩で情報遮断しよう")
 
-    # メイン疲労を判定
-    if brain >= mental and brain >= body:
-        result += videos["brain"][:2]
+    if score["mental"] > 50:
+        rec.append("深呼吸・音楽でリラックス")
 
-    elif mental >= brain and mental >= body:
-        result += videos["mental"][:2]
+    if score["body"] > 50:
+        rec.append("ストレッチして体ほぐそう")
 
-    else:
-        result += videos["body"][:2]
+    if not rec:
+        rec.append("軽く休憩しよう")
 
-    # サブ1本追加（軽いやつ）
-    result.append("3分リラックスBGM")
-
-    return result
+    return rec
