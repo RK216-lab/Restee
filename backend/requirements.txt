@@ -2,3 +2,5 @@ fastapi
 uvicorn
 sentence-transformers
 torch
+opensmile
+python-multipart
