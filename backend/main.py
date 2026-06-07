@@ -7,11 +7,9 @@ from recommender import recommend
 
 app = FastAPI()
 
-# 🌐CORS（フロント接続用）
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
