@@ -1,4 +1,4 @@
-  def calc_fatigue(texts):
+def calc_fatigue(texts):
     text = " ".join(texts)
 
     brain = 0
@@ -50,9 +50,9 @@
         if k in text:
             body += v
 
-    brain = min(max(brain, 0), 100)
-    mental = min(max(mental, 0), 100)
-    body = min(max(body, 0), 100)
+    brain = max(0, min(brain, 100))
+    mental = max(0, min(mental, 100))
+    body = max(0, min(body, 100))
 
     total = (brain + mental + body) / 3
 
