@@ -3,74 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Restee</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-    }
-    textarea {
-      width: 100%;
-      height: 80px;
-      margin-bottom: 10px;
-    }
-    button {
-      padding: 10px;
-      width: 100%;
-    }
-    .box {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-  </style>
 </head>
 <body>
 
-<h2>🧠 Restee</h2>
+  <h1>Restee</h1>
 
-<p>今日の会話（3ターン）</p>
+  <button id="micBtn">🎤 話す</button>
+  <p id="text"></p>
 
-<textarea id="t1" placeholder="1ターン目"></textarea>
-<textarea id="t2" placeholder="2ターン目"></textarea>
-<textarea id="t3" placeholder="3ターン目"></textarea>
-<button id="micBtn">🎤 話す</button>
-<p id="text"></p>
-<button onclick="analyze()">分析する</button>
+  <div id="result"></div>
 
-<div class="box" id="result"></div>
-
-<script>
-async function analyze() {
-
-  const texts = [
-    document.getElementById("t1").value,
-    document.getElementById("t2").value,
-    document.getElementById("t3").value
-  ];
-
-  const res = await fetch("https://restee.onrender.com/analyze", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ texts })
-  });
-
-  const data = await res.json();
-
-  document.getElementById("result").innerHTML = `
-    <h3>📊 スコア</h3>
-    🧠 脳疲労: ${data.score.brain}<br>
-    😔 精神疲労: ${data.score.mental}<br>
-    🏃 身体疲労: ${data.score.body}<br>
-    <br>
-    <h3>🎥 回復おすすめ</h3>
-    ${data.recommendations.map(v => "・" + v).join("<br>")}
-  `;
-}
-</script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
