@@ -22,7 +22,7 @@ recognition.onresult = (event) => {
 async function sendToAPI(text) {
   // ⚠️ 以下の URL を、あなたの Render の本当の URL に必ず書き換えてください！
   // 例: https://restee-backend.onrender.com/analyze
-  const RENDER_URL = "https://YOUR-RENDER.onrender.com/analyze"; 
+  const RENDER_URL = "https://restee.onrender.com/analyze"; 
 
   try {
     const res = await fetch(RENDER_URL, {
